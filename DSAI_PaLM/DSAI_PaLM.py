@@ -41,7 +41,7 @@ def predict_large_language_model_sample(
     """Predict using a Large Language Model."""
     vertexai.init(project=project_id, location=location)
 
-    chat_model = ChatModel.from_pretrained(model_name)
+    vAR_chat_model = ChatModel.from_pretrained(model_name)
     parameters = {
       "temperature": temperature,
       "max_output_tokens": max_output_tokens,
@@ -49,10 +49,10 @@ def predict_large_language_model_sample(
       "top_k": top_k,
     }
 
-    chat = chat_model.start_chat(
+    vAR_chat = vAR_chat_model.start_chat(
       examples=[]
     )
-    response=chat.send_message("""
+    vAR_response=vAR_chat.send_message("""
     Consider a california dmv customer applying new licese plate configuration. Perform below tasks for given word as below format:
 1.Please Provide the probability value and detailed explanation for each of the categories (profanity, obscene, insult, hate, toxic, threat) in table format.
 2.Deny the configuration if any one of the above categories probability value is greater than 0.2. Otherwise, accept the configuration.
@@ -92,8 +92,8 @@ Threat | 0.0 | 'prakash' is not a threat.
 
 
 Given configuration is :'"""+vAR_input.lower()+"'",**parameters)
-    print('PaLM response - ',response.text)
-    return response.text
+    print('PaLM response - ',vAR_response.text)
+    return vAR_response.text
 
 
 
