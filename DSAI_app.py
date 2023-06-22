@@ -25,11 +25,12 @@ vAR_st.set_page_config(page_title="DMV Recommendation", layout="wide")
 from DSAI_Utility.DSAI_Utility import All_Initialization,CSS_Property
 from DSAI_GPT.DSAI_gpt3 import DMVRecommendationGPT,VehicleCodeDivisionGPT,VehicleLawDescGPT
 from DSAI_GPT.DSAI_chatgpt import DMVRecommendationChatGPT,VehicleCodeDivisionChatGPT,VehicleLawDescChatGPT
-from DSAI_PaLM.DSAI_PaLM import DMVRecommendationPaLM
+from DSAI_PaLM.DSAI_PaLM_Chat import DMVRecommendationPaLMChat
+from DSAI_PaLM.DSAI_PaLM_Text import DMVRecommendationPaLMText
+from DSAI_LLM_Comparison.DSAI_LLM_Comparison import DMVRecommendationModelComparison
 
-import os
 
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r'C:\Users\ds_007\Downloads\personalized-learning-340207-699519426800.json'
+
 
 if __name__=='__main__':
     vAR_hide_footer = """<style>
@@ -54,31 +55,35 @@ if __name__=='__main__':
         vAR_st.subheader('Select the Functionality')
     with col4:
         vAR_st.write('')
-        vAR_option = vAR_st.selectbox('',('Select a Model','GPT-3', 'ChatGPT',"Google's PaLM"))
+        vAR_option = vAR_st.selectbox('',('Select a Model','GPT-3', 'GPT-4(ChatGPT)',"Google's PaLM(text-bison)","Google's PaLM(chat-bison)","LLM Model Comparison"))
         vAR_st.write('')
-        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Vehicle Code Divisions','Vehicle Law Descripiton'))
+        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text'))
 
-    if vAR_option=='ChatGPT' and vAR_option2=='ELP Recommendation':
+    if vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='ELP Recommendation':
         # Calling ChatGPT
         DMVRecommendationChatGPT()
     elif vAR_option=='GPT-3' and vAR_option2=='ELP Recommendation':
         # Calling GPT3
         DMVRecommendationGPT()
-    elif vAR_option=='ChatGPT' and vAR_option2=='Vehicle Code Divisions':
+    elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code':
         VehicleCodeDivisionChatGPT()
-    elif vAR_option=='GPT-3' and vAR_option2=='Vehicle Code Divisions':
+    elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code':
         VehicleCodeDivisionGPT()
-    elif vAR_option=='ChatGPT' and vAR_option2=='Vehicle Law Descripiton':
+    elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
         VehicleLawDescChatGPT()
-    elif vAR_option=='GPT-3' and vAR_option2=='Vehicle Law Descripiton':
+    elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
         VehicleLawDescGPT()
-    elif vAR_option=="Google's PaLM" and vAR_option2=='ELP Recommendation':
-        DMVRecommendationPaLM()
+    elif vAR_option=="Google's PaLM(chat-bison)" and vAR_option2=='ELP Recommendation':
+        DMVRecommendationPaLMChat()
+    elif vAR_option=="Google's PaLM(text-bison)" and vAR_option2=='ELP Recommendation':
+        DMVRecommendationPaLMText()
+    elif vAR_option=="LLM Model Comparison" and vAR_option2=='ELP Recommendation':
+        DMVRecommendationModelComparison()
     else:
         pass
 
 
     # except BaseException as exception:
-        # print('Error in main function - ', exception)
-        # exception = 'Something went wrong - '+str(exception)
-        # vAR_st.error(exception)
+    #     print('Error in main function - ', exception)
+    #     exception = 'Something went wrong - '+str(exception)
+    #     vAR_st.error(exception)
