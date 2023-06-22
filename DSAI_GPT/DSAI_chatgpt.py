@@ -248,7 +248,7 @@ def VehicleLawDescChatGPT():
         vAR_st.subheader("Legislative Text/Description")
     with col4:
         vAR_st.write('')
-        vAR_text = vAR_st.text_area('Enter Vehicle Law Description to Match the Vehicle Codes','')
+        vAR_text = vAR_st.text_area('Enter the Vehicle Code Legislative Text to Match the Vehicle Codes','')
         vAR_st.write('')
 
     if vAR_text:
