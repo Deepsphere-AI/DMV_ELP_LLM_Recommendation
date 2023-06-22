@@ -40,7 +40,7 @@ def DMVRecommendationGPT():
             vAR_st.write('')
             vAR_st.info("**Hint for user input:** Input length must be between 1 to 8 characters")
     elif vAR_input:
-        vAR_response = Chat_Conversation(vAR_input)
+        vAR_response = Chat_Conversation_GPT3(vAR_input)
         vAR_dict_start = vAR_response.index("{")
         vAR_dict = vAR_response[vAR_dict_start:]
         vAR_res_json = json.loads(vAR_dict)
@@ -68,7 +68,7 @@ def DMVRecommendationGPT():
 
 
 # OpenAI API Call
-def Chat_Conversation(vAR_input):
+def Chat_Conversation_GPT3(vAR_input):
 
     prompt = """Consider a california dmv customer applying new licese plate configuration. Perform below tasks for given word as below format:
 1.Please Provide the probability value and detailed explanation for each of the categories (profanity, obscene, insult, hate, toxic, threat) in table format.
@@ -92,21 +92,21 @@ Threat | 0.3 | 'omfg' is not typically used to express a threat.
 "REASON": "The configuration 'LUVU2' is a combination of two words 'love you too' which is a positive expression and does not represent/fall any of the profanity,insult,hate,threat,obscene,toxic categories and the configuration length is less than 8 characters."}
 
 
-Given configuration is : 'racism'
+Given configuration is : 'prakash'
 
 Category | Probability | Reason
 --- | --- | ---
-Profanity | 0 | The word 'racism' does not contain any profane language.
-Obscene | 0 | The word 'racism' does not contain any obscene language.
-Insult | 0.5 | The word 'racism' can be used as an insult, depending on the context.
-Hate | 0.8 | The word 'racism' is often used to express hatred towards a certain group of people.
-Toxic | 0.7 | The word 'racism' can be used to express toxic views and opinions.
-Threat | 0 | The word 'racism' does not contain any threatening language.
+Profanity | 0.0 | 'prakash' is not a profane word.
+Obscene | 0.0 | 'prakash' is not an obscene word.
+Insult | 0.0 | 'prakash' is not an insult.
+Hate | 0.0 | 'prakash' is not a hateful word.
+Toxic | 0.0 | 'prakash' is not a toxic word.
+Threat | 0.0 | 'prakash' is not a threat.
 
-{"CONCLUSION":
-"The configuration 'RACISM' is DENIED as the probability value for Obscene, Insult, and Hate categories are greater than or equal to 0.2.",
-"RECOMMENDED CONFIGURATION": "EQUALITY", 
-"REASON": "This configuration does not represent/fall any of the profanity,insult,hate,threat,obscene,toxic categories and the configuration length is less than 8 characters. It is recommended because it conveys a positive message of equality and respect."}
+{"CONCLUSION": 
+"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.",
+"RECOMMENDED CONFIGURATION": "N/A",
+"REASON": "N/A"}
 
 Given configuration is : '"""+vAR_input.lower()+"'"
     # prompt = "Please provide the probability value and reason for each of the categories (profanity, obscene, insult, hate, toxic, threat) in table for the given word.'"+vAR_input.lower()+"'"
@@ -242,7 +242,7 @@ def VehicleLawDescGPT():
         vAR_st.subheader("Legislative Text/Description")
     with col4:
         vAR_st.write('')
-        vAR_text = vAR_st.text_area('Enter Vehicle Law Description to Match the Vehicle Codes','')
+        vAR_text = vAR_st.text_area('Enter the Vehicle Code Legislative Text to Match the Vehicle Codes','')
         vAR_st.write('')
 
     if vAR_text:
