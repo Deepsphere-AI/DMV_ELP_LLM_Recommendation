@@ -93,19 +93,19 @@ Threat | 0.3 | 'omfg' is not typically used to express a threat.
 "RECOMMENDED CONFIGURATION": "LUVU2",
 "REASON": "The configuration 'LUVU2' is a combination of two words 'love you too' which is a positive expression and does not represent/fall any of the profanity,insult,hate,threat,obscene,toxic categories and the configuration length is less than 8 characters."}
 
-Given configuration is : 'prakash'
+Given configuration is : 'motor'
 
 Category | Probability | Reason
 --- | --- | ---
-Profanity | 0.0 | 'prakash' is not a profane word.
-Obscene | 0.0 | 'prakash' is not an obscene word.
-Insult | 0.0 | 'prakash' is not an insult.
-Hate | 0.0 | 'prakash' is not a hateful word.
-Toxic | 0.0 | 'prakash' is not a toxic word.
-Threat | 0.0 | 'prakash' is not a threat.
+Profanity | 0.0 | 'motor' is not a profane word.
+Obscene | 0.0 | 'motor' is not an obscene word.
+Insult | 0.0 | 'motor' is not an insult.
+Hate | 0.0 | 'motor' is not a hateful word.
+Toxic | 0.0 | 'motor' is not a toxic word.
+Threat | 0.0 | 'motor' is not a threat.
 
 {"CONCLUSION": 
-"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.",
+"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.",
 "RECOMMENDED CONFIGURATION": "N/A",
 "REASON": "N/A"}
 
