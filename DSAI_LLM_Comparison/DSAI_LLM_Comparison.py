@@ -19,10 +19,8 @@ Google Cloud Serverless Computing   | DMV Consultant  | Ajay Gupta | Initial  | 
 """
 
 from DSAI_GPT.DSAI_gpt3 import Get_Chat_DMV_Input
-from DSAI_LLM_Comparison.DSAI_Model_Recommendations import Chat_Conversation_GPT3
-from DSAI_LLM_Comparison.DSAI_Model_Recommendations import Chat_Conversation
-from DSAI_LLM_Comparison.DSAI_Model_Recommendations import DMVRecommendationPaLMChatModel
-from DSAI_LLM_Comparison.DSAI_Model_Recommendations import DMVRecommendationPaLMTextModel
+from DSAI_LLM_Comparison.DSAI_Model_Recommendations import Chat_Conversation_GPT3,Chat_Conversation,DMVRecommendationPaLMChatModel,DMVRecommendationPaLMTextModel,Azure_OpenAI_GPT35
+
 
 import os
 import pandas as pd
@@ -44,20 +42,20 @@ def DMVRecommendationModelComparison():
     elif vAR_input:
         col1,col2,col3 = vAR_st.columns([2.4,19,2])
         with col2:
-            vAR_response_gpt3 = Chat_Conversation_GPT3(vAR_input)
-            vAR_response_gpt3_dict = json.loads(vAR_response_gpt3)
-            vAR_response_gpt3_dict["Model"] = "GPT3"
-            vAR_response_gpt3_df = pd.DataFrame(vAR_response_gpt3_dict,index=[0])
-            print('GPT3 COMPLETED')
-            vAR_st.info('GPT3 COMPLETED')
+            # vAR_response_gpt3 = Chat_Conversation_GPT3(vAR_input)
+            # vAR_response_gpt3_dict = json.loads(vAR_response_gpt3)
+            # vAR_response_gpt3_dict["Model"] = "GPT3"
+            # vAR_response_gpt3_df = pd.DataFrame(vAR_response_gpt3_dict,index=[0])
+            # print('GPT3 COMPLETED')
+            # vAR_st.info('GPT3 COMPLETED')
             
             
-            vAR_response_gpt4 = Chat_Conversation(vAR_input)
-            vAR_response_gpt4_dict = json.loads(vAR_response_gpt4)
-            vAR_response_gpt4_dict["Model"] = "GPT-4(ChatGPT)"
-            vAR_response_gpt4_df = pd.DataFrame(vAR_response_gpt4_dict,index=[0])
-            print('GPT-4(ChatGPT) COMPLETED')
-            vAR_st.info('GPT-4(ChatGPT) COMPLETED')
+            # vAR_response_gpt4 = Chat_Conversation(vAR_input)
+            # vAR_response_gpt4_dict = json.loads(vAR_response_gpt4)
+            # vAR_response_gpt4_dict["Model"] = "GPT-4(ChatGPT)"
+            # vAR_response_gpt4_df = pd.DataFrame(vAR_response_gpt4_dict,index=[0])
+            # print('GPT-4(ChatGPT) COMPLETED')
+            # vAR_st.info('GPT-4(ChatGPT) COMPLETED')
             
             
             vAR_response_palm_chat = ""
@@ -84,10 +82,21 @@ def DMVRecommendationModelComparison():
             vAR_response_palm_text_df = pd.DataFrame(vAR_response_palm_text_dict,index=[0])
             print('PaLM Text COMPLETED')
             vAR_st.info('PaLM Text COMPLETED')
+
+            vAR_response_azure_gpt_35 = Azure_OpenAI_GPT35(vAR_input)
+            vAR_response_azure_gpt_35_dict = json.loads(vAR_response_azure_gpt_35)
+            vAR_response_azure_gpt_35_dict["Model"] = "Azure OpenAI ChatGPT(GPT-3.5)"
+            vAR_response_azure_gpt_35_df = pd.DataFrame(vAR_response_azure_gpt_35_dict,index=[0])
+            print('Azure OpenAI ChatGPT(GPT-3.5) COMPLETED')
+            vAR_st.info('Azure OpenAI ChatGPT(GPT-3.5) COMPLETED')
             
-            vAR_final_response_df = pd.concat([vAR_response_gpt3_df, vAR_response_gpt4_df], ignore_index=True)
-            vAR_final_response_df = pd.concat([vAR_final_response_df, vAR_response_palm_chat_df], ignore_index=True)
-            vAR_final_response_df = pd.concat([vAR_final_response_df, vAR_response_palm_text_df], ignore_index=True)
+            # vAR_final_response_df = pd.concat([vAR_response_gpt3_df, vAR_response_gpt4_df], ignore_index=True)
+            # vAR_final_response_df = pd.concat([vAR_final_response_df, vAR_response_palm_chat_df], ignore_index=True)
+            # vAR_final_response_df = pd.concat([vAR_final_response_df, vAR_response_palm_text_df], ignore_index=True)
+
+            vAR_final_response_df = pd.concat([vAR_response_palm_text_df, vAR_response_palm_chat_df], ignore_index=True)
+            vAR_final_response_df = pd.concat([vAR_final_response_df, vAR_response_azure_gpt_35_df], ignore_index=True)
+
             
             # Since append deprecated latest version of pandas
             

@@ -20,16 +20,14 @@ Google Cloud Serverless Computing   | DMV Consultant  | Ajay Gupta | Initial  | 
 
 
 import os
-import openai
 import streamlit as vAR_st
 import json
 import pandas as pd
 
-openai.api_key = os.environ["API_KEY"]
 
 
 # Calling defined functions for profanity validation
-def DMVRecommendationChatGPT():
+def DMVRecommendationChatGPT(openai):
     
 
     vAR_input = Get_Chat_DMV_Input()
@@ -39,7 +37,7 @@ def DMVRecommendationChatGPT():
             vAR_st.write('')
             vAR_st.info("**Hint for user input:** Input length must be between 1 to 8 characters")
     elif vAR_input:
-        vAR_response = Chat_Conversation(vAR_input)
+        vAR_response = Chat_Conversation(vAR_input,openai)
         vAR_dict_start = vAR_response.index("{")
         vAR_dict = vAR_response[vAR_dict_start:]
         vAR_res_json = json.loads(vAR_dict)
@@ -66,7 +64,8 @@ def DMVRecommendationChatGPT():
         
 
 # OpenAI API Call
-def Chat_Conversation(vAR_input):
+def Chat_Conversation(vAR_input,openai):
+    print('Gpt key in chatgpt - ',openai.api_key)
 
     response = openai.ChatCompletion.create(
     # model="gpt-3.5-turbo",
@@ -155,7 +154,7 @@ def Get_Chat_DMV_Input():
 
 # Vehicle Code Divisions
 
-def VehicleCodeDivisionChatGPT():
+def VehicleCodeDivisionChatGPT(openai):
     
     col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
     vAR_div_tuple = ('Select Anyone','DIVISION 1. WORDS AND PHRASES DEFINED [100 - 681]', 'DIVISION 2. ADMINISTRATION [1500 - 3093]','DIVISION 3. REGISTRATION OF VEHICLES AND CERTIFICATES OF TITLE [4000 - 9808]',
@@ -204,14 +203,14 @@ def VehicleCodeDivisionChatGPT():
                 print('code - ',vAR_code)
                 print('div - ',vAR_div)
                 if vAR_code!='Select Anyone' and vAR_code!='':
-                    vAR_response = ChatGPTResponse(vAR_div,vAR_code)
+                    vAR_response = ChatGPTResponse(vAR_div,vAR_code,openai)
                     vAR_st.write(vAR_response)
                     vAR_st.write('')
                     vAR_st.write('')
 
 
 
-def ChatGPTResponse(vAR_div,vAR_code):
+def ChatGPTResponse(vAR_div,vAR_code,openai):
     prompt = "Can you give me california vehicle law for "+vAR_div+" and section : "+vAR_code
     print('VEH prompt - ',prompt)
     response = openai.ChatCompletion.create(
@@ -238,7 +237,7 @@ def ChatGPTResponse(vAR_div,vAR_code):
 
 # Vehicle Law Description Match
 
-def VehicleLawDescChatGPT():
+def VehicleLawDescChatGPT(openai):
     
     col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
     
@@ -256,7 +255,7 @@ def VehicleLawDescChatGPT():
     
                     
         with col4:
-            vAR_response = ChatGPTResponseVEHDesc(vAR_text)
+            vAR_response = ChatGPTResponseVEHDesc(vAR_text,openai)
             vAR_st.write(vAR_response)
             vAR_st.write('')
             vAR_st.write('')
@@ -264,7 +263,7 @@ def VehicleLawDescChatGPT():
 
 
 
-def ChatGPTResponseVEHDesc(vAR_text):
+def ChatGPTResponseVEHDesc(vAR_text,openai):
     prompt = "Can you give relevant Vehicle Code and description from california VEH CODE and legislative law for given text: '"+vAR_text+"'"
     print('VEH prompt - ',prompt)
     response = openai.ChatCompletion.create(

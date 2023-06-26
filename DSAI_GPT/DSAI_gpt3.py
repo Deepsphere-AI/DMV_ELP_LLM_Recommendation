@@ -20,17 +20,14 @@ Google Cloud Serverless Computing   | DMV Consultant  | Ajay Gupta | Initial  | 
 
 
 
-import os
-import openai
 import streamlit as vAR_st
 import json
 import pandas as pd
 
-openai.api_key = os.environ["API_KEY"]
 
 
 # Calling defined functions for profanity validation
-def DMVRecommendationGPT():
+def DMVRecommendationGPT(openai):
     
 
     vAR_input = Get_Chat_DMV_Input()
@@ -40,7 +37,7 @@ def DMVRecommendationGPT():
             vAR_st.write('')
             vAR_st.info("**Hint for user input:** Input length must be between 1 to 8 characters")
     elif vAR_input:
-        vAR_response = Chat_Conversation_GPT3(vAR_input)
+        vAR_response = Chat_Conversation_GPT3(vAR_input,openai)
         vAR_dict_start = vAR_response.index("{")
         vAR_dict = vAR_response[vAR_dict_start:]
         vAR_res_json = json.loads(vAR_dict)
@@ -68,7 +65,7 @@ def DMVRecommendationGPT():
 
 
 # OpenAI API Call
-def Chat_Conversation_GPT3(vAR_input):
+def Chat_Conversation_GPT3(vAR_input,openai):
 
     prompt = """Consider a california dmv customer applying new licese plate configuration. Perform below tasks for given word as below format:
 1.Please Provide the probability value and detailed explanation for each of the categories (profanity, obscene, insult, hate, toxic, threat) in table format.

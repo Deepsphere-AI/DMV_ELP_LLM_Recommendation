@@ -23,12 +23,13 @@ import streamlit as vAR_st
 vAR_st.set_page_config(page_title="DMV Recommendation", layout="wide")
 
 from DSAI_Utility.DSAI_Utility import All_Initialization,CSS_Property
-from DSAI_GPT.DSAI_gpt3 import DMVRecommendationGPT,VehicleCodeDivisionGPT,VehicleLawDescGPT
-from DSAI_GPT.DSAI_chatgpt import DMVRecommendationChatGPT,VehicleCodeDivisionChatGPT,VehicleLawDescChatGPT
+# from DSAI_GPT.DSAI_gpt3 import DMVRecommendationGPT,VehicleCodeDivisionGPT,VehicleLawDescGPT
 from DSAI_PaLM.DSAI_PaLM_Chat import DMVRecommendationPaLMChat
 from DSAI_PaLM.DSAI_PaLM_Text import DMVRecommendationPaLMText
 from DSAI_LLM_Comparison.DSAI_LLM_Comparison import DMVRecommendationModelComparison
+from DSAI_GPT.DSAI_Azure_GPT35 import DMVRecommendationAzureGPT
 
+import os
 
 
 
@@ -55,30 +56,47 @@ if __name__=='__main__':
         vAR_st.subheader('Select the Functionality')
     with col4:
         vAR_st.write('')
-        vAR_option = vAR_st.selectbox('',('Select a Model','GPT-3', 'GPT-4(ChatGPT)',"Google's PaLM(text-bison)","Google's PaLM(chat-bison)","LLM Model Comparison"))
+        vAR_option = vAR_st.selectbox('',('Select a Model',"Google's PaLM(text-bison)","Google's PaLM(chat-bison)","Azure OpenAI ChatGPT(GPT-3.5)","LLM Model Comparison"))
         vAR_st.write('')
         vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text'))
 
-    if vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='ELP Recommendation':
-        # Calling ChatGPT
-        DMVRecommendationChatGPT()
-    elif vAR_option=='GPT-3' and vAR_option2=='ELP Recommendation':
-        # Calling GPT3
-        DMVRecommendationGPT()
-    elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code':
-        VehicleCodeDivisionChatGPT()
-    elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code':
-        VehicleCodeDivisionGPT()
-    elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
-        VehicleLawDescChatGPT()
-    elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
-        VehicleLawDescGPT()
-    elif vAR_option=="Google's PaLM(chat-bison)" and vAR_option2=='ELP Recommendation':
+
+    
+
+
+
+
+
+    # if vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='ELP Recommendation':
+        
+    #     DMVRecommendationChatGPT()
+    # elif vAR_option=='GPT-3' and vAR_option2=='ELP Recommendation':
+    #     # Calling GPT3
+    #     DMVRecommendationGPT()
+    # elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code':
+    #     VehicleCodeDivisionChatGPT()
+    # elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code':
+    #     VehicleCodeDivisionGPT()
+    # elif vAR_option=='GPT-4(ChatGPT)' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
+    #     VehicleLawDescChatGPT()
+    # elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
+    #     VehicleLawDescGPT()
+
+
+
+    if vAR_option=="Google's PaLM(chat-bison)" and vAR_option2=='ELP Recommendation':
         DMVRecommendationPaLMChat()
     elif vAR_option=="Google's PaLM(text-bison)" and vAR_option2=='ELP Recommendation':
         DMVRecommendationPaLMText()
+
+    elif vAR_option=="Azure OpenAI ChatGPT(GPT-3.5)" and vAR_option2=='ELP Recommendation':        
+        DMVRecommendationAzureGPT()
     elif vAR_option=="LLM Model Comparison" and vAR_option2=='ELP Recommendation':
         DMVRecommendationModelComparison()
+
+
+
+
     else:
         pass
 

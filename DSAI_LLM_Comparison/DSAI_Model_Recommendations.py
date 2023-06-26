@@ -253,3 +253,40 @@ input: Given configuration is :'"""+vAR_input+"'"+
     print(f"Response from Model: {response.text}")
     return response.text
 
+
+
+
+
+def Azure_OpenAI_GPT35(vAR_input):
+    openai.api_type = os.getenv("API_TYPE")
+    openai.api_base = os.getenv("API_BASE")
+    openai.api_version = os.getenv("API_VERSION")
+    openai.api_key = os.getenv("AZURE_API_KEY")
+    response = openai.ChatCompletion.create(
+    engine="GPT-35-DEV-Deployment",
+    messages = [{"role":"system","content":"""Consider a california dmv customer applying new licese plate configuration. Perform below tasks for given word as below format:\n1.Please Provide the probability value and detailed explanation for each of the categories (profanity, obscene, insult, hate, toxic, threat) in table format.\n2.Deny the configuration if any one of the above categories probability value is greater than 0.2. Otherwise, accept the configuration.\n3.If it's denied, recommend new configuration which must not represent/fall any of the profanity,insult,hate,threat,obscene,toxic categories and the configuration length must be less than 8 characters. Also, provide the recommended configuration reason, why it is recommended? If it's accepted no recommendation needed."""},{"role":"user","content":"Given configuration is : 'omfg'"},{"role":"assistant","content":"""{"Profanity":0.9,"Profanity Reason":"'omfg' is an acronym for 'oh my f***ing god', which is considered profane language.",
+            "Obscene":0.8,"Obscene Reason":"'omfg' is considered to be an obscene expression.",
+            "Insult":0.7,"Insult Reason":"'omfg' can be used as an insult, depending on the context.",
+            "Hate":0.5,"Hate Reason":"'omfg' is not typically used to express hate, but it could be used in a hateful manner.",
+            "Toxic":0.6,"Toxic Reason":"'omfg' can be used in a toxic manner, depending on the context.",
+            "Threat":0.3,"Threat Reason":"'omfg' is not typically used to express a threat.",
+"Conclusion":"The configuration 'OMFG' is DENIED as the probability value of Profanity is greater than or equal to 0.2.","Recommended Configuration":"LUVU2",
+"Recommendation Reason":"The configuration 'LUVU2' is a combination of two words 'love you too' which is a positive expression and does not represent/fall any of the profanity,insult,hate,threat,obscene,toxic categories and the configuration length is less than 8 characters."}
+"""},{"role":"user","content":"Given configuration is : 'motor'"},{"role":"assistant","content":"""
+{"Profanity":0.0,"Profanity Reason":"'motor' is not a profane word.",
+            "Obscene":0.0,"Obscene Reason":"'motor' is not an obscene word.",
+            "Insult":0.0,"Insult Reason":"'motor' is not an insult word.",
+            "Hate":0.0,"Hate Reason":"'motor' is not a hateful word.",
+            "Toxic":0.0,"Toxic Reason":"'motor' is not a toxic word.",
+            "Threat":0.0,"Threat Reason":"'motor' is not athreat.",
+"Conclusion":"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
+"Recommendation Reason":"N/A"}
+
+"""},{"role":"user","content":"Given configuration is :'"+vAR_input+"'"}],
+    temperature=0,
+    max_tokens=800,
+    top_p=1,
+    presence_penalty=0.9,
+    stop=None)
+    print('Azure response - ',response)
+    return response["choices"][0]["message"]["content"]
