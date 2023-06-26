@@ -49,15 +49,15 @@ Given configuration is : 'omfg'
 
 
 
-Given configuration is : 'prakash'
+Given configuration is : 'motor'
 
-{"Profanity":0.0,"Profanity Reason":"'prakash' is not a profane word.",
-            "Obscene":0.0,"Obscene Reason":"'prakash' is not an obscene word.",
-            "Insult":0.0,"Insult Reason":"'prakash' is not an insult word.",
-            "Hate":0.0,"Hate Reason":"'prakash' is not a hateful word.",
-            "Toxic":0.0,"Toxic Reason":"'prakash' is not a toxic word.",
-            "Threat":0.0,"Threat Reason":"'prakash' is not athreat.",
-"Conclusion":"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
+{"Profanity":0.0,"Profanity Reason":"'motor' is not a profane word.",
+            "Obscene":0.0,"Obscene Reason":"'motor' is not an obscene word.",
+            "Insult":0.0,"Insult Reason":"'motor' is not an insult word.",
+            "Hate":0.0,"Hate Reason":"'motor' is not a hateful word.",
+            "Toxic":0.0,"Toxic Reason":"'motor' is not a toxic word.",
+            "Threat":0.0,"Threat Reason":"'motor' is not athreat.",
+"Conclusion":"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
 "Recommendation Reason":"N/A"}
 
 Given configuration is : '"""+vAR_input.lower()+"'"
@@ -105,15 +105,15 @@ Given configuration is : 'omfg'
 
 
 
-Given configuration is : 'prakash'
+Given configuration is : 'motor'
 
-{"Profanity":0.0,"Profanity Reason":"'prakash' is not a profane word.",
-            "Obscene":0.0,"Obscene Reason":"'prakash' is not an obscene word.",
-            "Insult":0.0,"Insult Reason":"'prakash' is not an insult word.",
-            "Hate":0.0,"Hate Reason":"'prakash' is not a hateful word.",
-            "Toxic":0.0,"Toxic Reason":"'prakash' is not a toxic word.",
-            "Threat":0.0,"Threat Reason":"'prakash' is not athreat.",
-"Conclusion":"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
+{"Profanity":0.0,"Profanity Reason":"'motor' is not a profane word.",
+            "Obscene":0.0,"Obscene Reason":"'motor' is not an obscene word.",
+            "Insult":0.0,"Insult Reason":"'motor' is not an insult word.",
+            "Hate":0.0,"Hate Reason":"'motor' is not a hateful word.",
+            "Toxic":0.0,"Toxic Reason":"'motor' is not a toxic word.",
+            "Threat":0.0,"Threat Reason":"'motor' is not athreat.",
+"Conclusion":"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
 "Recommendation Reason":"N/A"}
 
 Given configuration is :'"""+vAR_input.lower()+"'"},
@@ -169,15 +169,15 @@ def DMVRecommendationPaLMChatModel(
 """
             ),
             InputOutputTextPair(
-                input_text="""Given configuration is : 'prakash'""",
+                input_text="""Given configuration is : 'motor'""",
                 output_text="""
-{"Profanity":0.0,"Profanity Reason":"'prakash' is not a profane word.",
-            "Obscene":0.0,"Obscene Reason":"'prakash' is not an obscene word.",
-            "Insult":0.0,"Insult Reason":"'prakash' is not an insult word.",
-            "Hate":0.0,"Hate Reason":"'prakash' is not a hateful word.",
-            "Toxic":0.0,"Toxic Reason":"'prakash' is not a toxic word.",
-            "Threat":0.0,"Threat Reason":"'prakash' is not athreat.",
-"Conclusion":"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
+{"Profanity":0.0,"Profanity Reason":"'motor' is not a profane word.",
+            "Obscene":0.0,"Obscene Reason":"'motor' is not an obscene word.",
+            "Insult":0.0,"Insult Reason":"'motor' is not an insult word.",
+            "Hate":0.0,"Hate Reason":"'motor' is not a hateful word.",
+            "Toxic":0.0,"Toxic Reason":"'motor' is not a toxic word.",
+            "Threat":0.0,"Threat Reason":"'motor' is not athreat.",
+"Conclusion":"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
 "Recommendation Reason":"N/A"}
 
 """
@@ -232,16 +232,16 @@ output:
 
 
 
-input: Given configuration is : 'prakash'
+input: Given configuration is : 'motor'
 output: 
 
-{"Profanity":0.0,"Profanity Reason":"'prakash' is not a profane word.",
-            "Obscene":0.0,"Obscene Reason":"'prakash' is not an obscene word.",
-            "Insult":0.0,"Insult Reason":"'prakash' is not an insult word.",
-            "Hate":0.0,"Hate Reason":"'prakash' is not a hateful word.",
-            "Toxic":0.0,"Toxic Reason":"'prakash' is not a toxic word.",
-            "Threat":0.0,"Threat Reason":"'prakash' is not athreat.",
-"Conclusion":"The configuration 'prakash' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
+{"Profanity":0.0,"Profanity Reason":"'motor' is not a profane word.",
+            "Obscene":0.0,"Obscene Reason":"'motor' is not an obscene word.",
+            "Insult":0.0,"Insult Reason":"'motor' is not an insult word.",
+            "Hate":0.0,"Hate Reason":"'motor' is not a hateful word.",
+            "Toxic":0.0,"Toxic Reason":"'motor' is not a toxic word.",
+            "Threat":0.0,"Threat Reason":"'motor' is not athreat.",
+"Conclusion":"The configuration 'motor' is ACCEPTED as the probability value of all categories are less than 0.2.","Recommended Configuration":"N/A",
 "Recommendation Reason":"N/A"}
 
 
