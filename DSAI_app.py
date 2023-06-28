@@ -27,11 +27,11 @@ from DSAI_Utility.DSAI_Utility import All_Initialization,CSS_Property
 from DSAI_PaLM.DSAI_PaLM_Chat import DMVRecommendationPaLMChat
 from DSAI_PaLM.DSAI_PaLM_Text import DMVRecommendationPaLMText
 from DSAI_LLM_Comparison.DSAI_LLM_Comparison import DMVRecommendationModelComparison
-from DSAI_GPT.DSAI_Azure_GPT35 import DMVRecommendationAzureGPT
+from DSAI_Azure_GPT.DSAI_Azure_GPT35 import DMVRecommendationAzureGPT,VehicleCodeDivisionAzureGPT,VehicleLawDescAzureGPT
 
 import os
 
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r'C:\Users\ds_007\Downloads\elp-2022-352222-876c30ec137d.json'
 
 if __name__=='__main__':
     vAR_hide_footer = """<style>
@@ -82,9 +82,15 @@ if __name__=='__main__':
     # elif vAR_option=='GPT-3' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
     #     VehicleLawDescGPT()
 
+    if vAR_option=='Azure OpenAI ChatGPT(GPT-3.5)' and vAR_option2=='Prompt - Vehicle Code':
+        VehicleCodeDivisionAzureGPT()
+
+    elif vAR_option=='Azure OpenAI ChatGPT(GPT-3.5)' and vAR_option2=='Prompt - Vehicle Code Legislative Text':
+        VehicleLawDescAzureGPT()
 
 
-    if vAR_option=="Google's PaLM(chat-bison)" and vAR_option2=='ELP Recommendation':
+
+    elif vAR_option=="Google's PaLM(chat-bison)" and vAR_option2=='ELP Recommendation':
         DMVRecommendationPaLMChat()
     elif vAR_option=="Google's PaLM(text-bison)" and vAR_option2=='ELP Recommendation':
         DMVRecommendationPaLMText()

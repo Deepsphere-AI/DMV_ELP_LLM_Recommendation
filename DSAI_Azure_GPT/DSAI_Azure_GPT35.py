@@ -80,3 +80,148 @@ def DMVRecommendationAzureGPT():
             vAR_st.write('')
             vAR_st.write('')
             vAR_st.table(vAR_res_df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Below Code Block Development in-progress - this is for California State Vehicle Law code and description similarity prediction
+
+
+
+# Vehicle Code Divisions
+
+def VehicleCodeDivisionAzureGPT():
+    
+    col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
+    vAR_div_tuple = ('Select Anyone','DIVISION 1. WORDS AND PHRASES DEFINED [100 - 681]', 'DIVISION 2. ADMINISTRATION [1500 - 3093]','DIVISION 3. REGISTRATION OF VEHICLES AND CERTIFICATES OF TITLE [4000 - 9808]',
+                                       'DIVISION 3.5. REGISTRATION AND TRANSFER OF VESSELS [9840 - 9928]','DIVISION 3.6. VEHICLE SALES [9950 - 9993]','DIVISION 4. SPECIAL ANTITHEFT LAWS [10500 - 10904]',
+                                       'DIVISION 5. OCCUPATIONAL LICENSING AND BUSINESS REGULATIONS [11100 - 12217]',"DIVISION 6. DRIVERS' LICENSES [12500 - 15326]",
+                                       'DIVISION 6.5. MOTOR VEHICLE TRANSACTIONS WITH MINORS [15500 - 15501]','DIVISION 6.7. UNATTENDED CHILD IN MOTOR VEHICLE SAFETY ACT [15600 - 15632]',
+                                       'DIVISION 7. FINANCIAL RESPONSIBILITY LAWS [16000 - 16560]','DIVISION 9. CIVIL LIABILITY [17000 - 17714]','DIVISION 10. ACCIDENTS AND ACCIDENT REPORTS [20000 - 20018]',
+                                       'DIVISION 11. RULES OF THE ROAD [21000 - 23336]','DIVISION 11.5. SENTENCING FOR DRIVING WHILE UNDER THE INFLUENCE [23500 - 23675]','DIVISION 12. EQUIPMENT OF VEHICLES [24000 - 28160]',
+                                       'DIVISION 13. TOWING AND LOADING EQUIPMENT [29000 - 31560]','DIVISION 14. TRANSPORTATION OF EXPLOSIVES [31600 - 31620]','DIVISION 14.1. TRANSPORTATION OF HAZARDOUS MATERIAL [32000 - 32053]',
+                                       'DIVISION 14.3. TRANSPORTATION OF INHALATION HAZARDS [32100 - 32109]','DIVISION 14.5. TRANSPORTATION OF RADIOACTIVE MATERIALS [33000 - 33002]','DIVISION 14.7. FLAMMABLE AND COMBUSTIBLE LIQUIDS [34000 - 34100]',
+                                       'DIVISION 14.8. SAFETY REGULATIONS [34500 - 34520.5]','DIVISION 14.85. MOTOR CARRIERS OF PROPERTY PERMIT ACT [34600 - 34672]','DIVISION 14.86. Private Carriers of Passengers Registration Act [34680 - 34693]',
+                                       'DIVISION 14.9. MOTOR VEHICLE DAMAGE CONTROL [34700 - 34725]','DIVISION 15. SIZE, WEIGHT, AND LOAD [35000 - 35796]','DIVISION 16. IMPLEMENTS OF HUSBANDRY [36000 - 36800]',
+                                       'DIVISION 16.5. OFF-HIGHWAY VEHICLES [38000 - 38604]','DIVISION 16.6. Autonomous Vehicles [38750 - 38755]','DIVISION 16.7. REGISTRATION AND LICENSING OF BICYCLES [39000 - 39011]',
+                                       'DIVISION 17. OFFENSES AND PROSECUTION [40000.1 - 41610]','DIVISION 18. PENALTIES AND DISPOSITION OF FEES, FINES, AND FORFEITURES [42000 - 42277]')
+    vAR_code = ''
+    vAR_div = ''
+    vAR_temp_div = ('DIVISION 1. WORDS AND PHRASES DEFINED [100 - 681]','DIVISION 2. ADMINISTRATION [1500 - 3093]')
+    with col2:
+        vAR_st.write('')
+        vAR_st.write('')
+        vAR_st.subheader("Vehicle Code Division")
+    with col4:
+        vAR_st.write('')
+        vAR_div = vAR_st.selectbox('',vAR_div_tuple)
+        vAR_st.write('')
+
+    if vAR_div!='Select Anyone':
+        col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
+        with col2:
+                if vAR_div in vAR_temp_div:
+                    vAR_st.write('')
+                    vAR_st.subheader("Select Vehicle Code")
+                    
+        with col4:
+                if vAR_div=='DIVISION 1. WORDS AND PHRASES DEFINED [100 - 681]':
+                    vAR_code = vAR_st.selectbox('',('Select Anyone','100','102','105','108','109','110'))
+                
+                elif vAR_div=='DIVISION 2. ADMINISTRATION [1500 - 3093]':
+                    vAR_code = vAR_st.selectbox('',('Select Anyone','1500','1501','1502','1503','1504','1505'))
+
+                elif vAR_div  in vAR_div_tuple:
+                    vAR_st.info('Development is in-progress...')
+
+
+
+                print('code - ',vAR_code)
+                print('div - ',vAR_div)
+                if vAR_code!='Select Anyone' and vAR_code!='':
+                    vAR_response = AzureGPTResponse(vAR_div,vAR_code)
+                    vAR_st.write(vAR_response)
+                    vAR_st.write('')
+                    vAR_st.write('')
+
+
+
+def AzureGPTResponse(vAR_div,vAR_code):
+    prompt = "Can you give me california vehicle law for "+vAR_div+" and section : "+vAR_code
+    print('VEH prompt - ',prompt)
+    response = openai.ChatCompletion.create(
+    engine="GPT-35-DEV-Deployment",
+    messages=[
+        {"role": "user", "content": prompt},
+    ],
+    temperature=0,
+    max_tokens=2000,
+    top_p=1,
+    # frequency_penalty=0,
+    presence_penalty=0.9,
+
+)
+    print(response['choices'][0]['message']['content'])
+    return response['choices'][0]['message']['content']
+
+
+
+
+
+
+
+# Vehicle Law Description Match
+
+def VehicleLawDescAzureGPT():
+    
+    col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
+    
+    with col2:
+        vAR_st.write('')
+        vAR_st.write('')
+        vAR_st.subheader("Legislative Text/Description")
+    with col4:
+        vAR_st.write('')
+        vAR_text = vAR_st.text_area('Enter the Vehicle Code Legislative Text to Match the Vehicle Codes','')
+        vAR_st.write('')
+
+    if vAR_text:
+        col1,col2,col3,col4,col5 = vAR_st.columns([1,9,1,9,2])
+    
+                    
+        with col4:
+            vAR_response = AzureGPTResponseVEHDesc(vAR_text)
+            vAR_st.write(vAR_response)
+            vAR_st.write('')
+            vAR_st.write('')
+
+
+
+
+def AzureGPTResponseVEHDesc(vAR_text):
+    prompt = "Can you give relevant Vehicle Code and description from california VEH CODE and legislative law for given text: '"+vAR_text+"'"
+    print('VEH prompt - ',prompt)
+    response = openai.ChatCompletion.create(
+    engine="GPT-35-DEV-Deployment",
+    messages=[
+        {"role": "user", "content": prompt},
+    ],
+    temperature=0,
+    max_tokens=2000,
+    top_p=1,
+    # frequency_penalty=0,
+    presence_penalty=0.9,
+
+)
+    print(response['choices'][0]['message']['content'])
+    return response['choices'][0]['message']['content']
