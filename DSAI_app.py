@@ -28,10 +28,10 @@ from DSAI_PaLM.DSAI_PaLM_Chat import DMVRecommendationPaLMChat
 from DSAI_PaLM.DSAI_PaLM_Text import DMVRecommendationPaLMText
 from DSAI_LLM_Comparison.DSAI_LLM_Comparison import DMVRecommendationModelComparison
 from DSAI_Azure_GPT.DSAI_Azure_GPT35 import DMVRecommendationAzureGPT,VehicleCodeDivisionAzureGPT,VehicleLawDescAzureGPT
+from DSAI_BQ_Explainable_AI.DSAI_BQ_Response import GetConfigDetailsResponse
 
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r'C:\Users\ds_007\Downloads\elp-2022-352222-876c30ec137d.json'
 
 if __name__=='__main__':
     vAR_hide_footer = """<style>
@@ -58,7 +58,7 @@ if __name__=='__main__':
         vAR_st.write('')
         vAR_option = vAR_st.selectbox('',('Select a Model',"Google's PaLM(text-bison)","Google's PaLM(chat-bison)","Azure OpenAI ChatGPT(GPT-3.5)","LLM Model Comparison"))
         vAR_st.write('')
-        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text'))
+        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text','ELP Explainable AI'))
 
 
     
@@ -99,6 +99,10 @@ if __name__=='__main__':
         DMVRecommendationAzureGPT()
     elif vAR_option=="LLM Model Comparison" and vAR_option2=='ELP Recommendation':
         DMVRecommendationModelComparison()
+    
+    elif vAR_option2=="ELP Explainable AI":
+        GetConfigDetailsResponse()
+
 
 
 
