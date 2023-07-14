@@ -29,6 +29,7 @@ from DSAI_PaLM.DSAI_PaLM_Text import DMVRecommendationPaLMText
 from DSAI_LLM_Comparison.DSAI_LLM_Comparison import DMVRecommendationModelComparison
 from DSAI_Azure_GPT.DSAI_Azure_GPT35 import DMVRecommendationAzureGPT,VehicleCodeDivisionAzureGPT,VehicleLawDescAzureGPT
 from DSAI_BQ_Explainable_AI.DSAI_BQ_Response import GetConfigDetailsResponse
+from DSAI_Driver_Risk_Score_Prediction.DSAI_Risk_Prediction import DriverRiskPrediction
 
 import os
 
@@ -58,7 +59,7 @@ if __name__=='__main__':
         vAR_st.write('')
         vAR_option = vAR_st.selectbox('',('Select a Model',"Google's PaLM(text-bison)","Google's PaLM(chat-bison)","Azure OpenAI ChatGPT(GPT-3.5)","LLM Model Comparison"))
         vAR_st.write('')
-        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text','ELP Explainable AI'))
+        vAR_option2 = vAR_st.selectbox('',('Select anyone','ELP Recommendation', 'Prompt - Vehicle Code','Prompt - Vehicle Code Legislative Text','ELP Explainable AI','Driver Risk Score Prediction'))
 
 
     
@@ -102,6 +103,9 @@ if __name__=='__main__':
     
     elif vAR_option2=="ELP Explainable AI":
         GetConfigDetailsResponse()
+        
+    elif vAR_option2=="Driver Risk Score Prediction":
+        DriverRiskPrediction()
 
 
 

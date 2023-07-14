@@ -26,3 +26,4 @@ pipreqs
 requests
 altair==4.0
 google-cloud-aiplatform
+google-auth
