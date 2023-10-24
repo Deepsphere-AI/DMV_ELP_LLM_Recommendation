@@ -295,10 +295,10 @@
     } */
 
     img{
-        max-width: 100% !important;
-            text-align: center;
+        /* max-width: 100% !important;
+            text-align: center; */
             margin: 0 auto;
-            width: 200px;
+            width: 250px;
         }
 .css-10trblm {
     position: relative;

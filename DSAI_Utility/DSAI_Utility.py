@@ -32,7 +32,7 @@ def CSS_Property(file_name):
 def All_Initialization():
     image = Image.open('DSAI_Utility/Logo_final.png')
     st.image(image)
-    st.markdown("<h1 style='text-align: center; color: #454545; font-size:25px;'>DMV ChatGPT Business Application</h1><h2 style='text-align: center; color: blue; font-size:20px;'>GPT Powered ELP Profanity Check and California Vehicle Code(CVC) Lookup</h2>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #454545; font-size:25px;'>DSAI ChatGPT Business Application</h1><h2 style='text-align: center; color: blue; font-size:20px;'>GPT Powered ELP Profanity Check and California Vehicle Code(CVC) Lookup</h2>", unsafe_allow_html=True)
     st.markdown("""
     <hr style="width:100%;height:3px;background-color:gray;border-width:10">
     """, unsafe_allow_html=True)
